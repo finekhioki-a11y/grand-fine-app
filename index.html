@@ -4,44 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>グランドファイン豊中</title>
-    <!-- マニフェストとアイコン設定 -->
     <link rel="manifest" href="manifest.json">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <div class="bg-white/85 p-8 rounded-3xl backdrop-blur-md shadow-2xl w-full max-w-3xl text-center">
-        <!-- ロゴ表示 -->
-        <img src="toyonaka.png" alt="Logo" class="mx-auto h-16 mb-4">
-        <h1 class="text-3xl font-bold text-gray-800 mb-8">グランドファイン豊中</h1>
+    <div class="bg-white/85 p-6 rounded-3xl backdrop-blur-md shadow-2xl w-full max-w-lg text-center">
+        <img src="gftoyonaka_w.jpg" alt="Logo" class="mx-auto h-12 mb-6">
         
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <!-- ボタンを茶色(amber-900)に統一 -->
-            <a href="https://www.hotel-fine.co.jp/hotel/gf-toyonakaminami/price/#r_s" class="bg-amber-900 text-white p-6 rounded-2xl shadow-lg hover:opacity-90 transition-all flex flex-col items-center">
-                <span class="text-3xl font-black">S</span>
+        <!-- ランクボタン -->
+        <div class="grid grid-cols-4 gap-2 mb-8">
+            <a href="https://www.hotel-fine.co.jp/hotel/gf-toyonakaminami/price/#r_s" class="bg-amber-900 text-white p-2 rounded-lg text-xs font-bold hover:opacity-90">S</a>
+            <a href="https://www.hotel-fine.co.jp/hotel/gf-toyonakaminami/price/#r_a" class="bg-amber-900 text-white p-2 rounded-lg text-xs font-bold hover:opacity-90">A</a>
+            <a href="https://www.hotel-fine.co.jp/hotel/gf-toyonakaminami/price/#r_b" class="bg-amber-900 text-white p-2 rounded-lg text-xs font-bold hover:opacity-90">B</a>
+            <a href="https://www.hotel-fine.co.jp/hotel/gf-toyonakaminami/price/#r_c" class="bg-amber-900 text-white p-2 rounded-lg text-xs font-bold hover:opacity-90">C</a>
+            <a href="https://www.hotel-fine.co.jp/hotel/gf-toyonakaminami/price/#r_d" class="bg-amber-900 text-white p-2 rounded-lg text-xs font-bold hover:opacity-90">D</a>
+            <a href="https://www.hotel-fine.co.jp/hotel/gf-toyonakaminami/price/#r_e" class="bg-amber-900 text-white p-2 rounded-lg text-xs font-bold hover:opacity-90">E</a>
+            <a href="https://www.hotel-fine.co.jp/hotel/gf-toyonakaminami/price/#r_f" class="bg-amber-900 text-white p-2 rounded-lg text-xs font-bold hover:opacity-90">F</a>
+        </div>
+
+        <!-- 下部のメニュー（絵文字を使用） -->
+        <div class="grid grid-cols-2 gap-4 border-t pt-4">
+            <a href="https://www.hotel-fine.co.jp/hotel/gf-toyonakaminami/price/" class="flex flex-col items-center hover:opacity-70 transition-all">
+                <span class="text-3xl mb-1">🏷️</span>
+                <span class="text-xs font-bold text-gray-700">料金案内</span>
             </a>
-            <a href="https://www.hotel-fine.co.jp/hotel/gf-toyonakaminami/price/#r_a" class="bg-amber-900 text-white p-6 rounded-2xl shadow-lg hover:opacity-90 transition-all flex flex-col items-center">
-                <span class="text-3xl font-black">A</span>
-            </a>
-            <a href="https://www.hotel-fine.co.jp/hotel/gf-toyonakaminami/price/#r_b" class="bg-amber-900 text-white p-6 rounded-2xl shadow-lg hover:opacity-90 transition-all flex flex-col items-center">
-                <span class="text-3xl font-black">B</span>
-            </a>
-            <a href="https://www.hotel-fine.co.jp/hotel/gf-toyonakaminami/price/#r_c" class="bg-amber-900 text-white p-6 rounded-2xl shadow-lg hover:opacity-90 transition-all flex flex-col items-center">
-                <span class="text-3xl font-black">C</span>
-            </a>
-            <a href="https://www.hotel-fine.co.jp/hotel/gf-toyonakaminami/price/#r_d" class="bg-amber-900 text-white p-6 rounded-2xl shadow-lg hover:opacity-90 transition-all flex flex-col items-center">
-                <span class="text-3xl font-black">D</span>
-            </a>
-            <a href="https://www.hotel-fine.co.jp/hotel/gf-toyonakaminami/price/#r_e" class="bg-amber-900 text-white p-6 rounded-2xl shadow-lg hover:opacity-90 transition-all flex flex-col items-center">
-                <span class="text-3xl font-black">E</span>
-            </a>
-            <a href="https://www.hotel-fine.co.jp/hotel/gf-toyonakaminami/price/#r_f" class="bg-amber-900 text-white p-6 rounded-2xl shadow-lg hover:opacity-90 transition-all flex flex-col items-center">
-                <span class="text-3xl font-black">F</span>
+            <a href="https://www.hotel-fine.co.jp/hotel/gf-toyonakaminami/facility/" class="flex flex-col items-center hover:opacity-70 transition-all">
+                <span class="text-3xl mb-1">🛋️</span>
+                <span class="text-xs font-bold text-gray-700">設備案内</span>
             </a>
         </div>
     </div>
-
-    <script src="App.js"></script>
 </body>
 </html>
