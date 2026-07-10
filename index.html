@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>グランドファイン豊中 - 客室案内</title>
+    <!-- Tailwind CSSをCDNで読み込み -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-image: url('hotel-exterior.jpg'); /* 外観画像のファイル名 */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center p-4">
+
+    <div class="bg-white/85 p-8 rounded-3xl backdrop-blur-md shadow-2xl w-full max-w-3xl text-center">
+        <h1 class="text-3xl font-bold text-gray-800 mb-2">グランドファイン豊中</h1>
+        <p class="text-gray-600 mb-8">客室ランクを選択してください</p>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <!-- ランクS -->
+            <a href="https://www.hotel-fine.co.jp/hotel/gf-toyonakaminami/price/#r_s" class="bg-yellow-500 text-white p-6 rounded-2xl shadow-lg hover:opacity-90 transition-all flex flex-col items-center">
+                <span class="text-4xl font-black">S</span>
+                <span class="text-xs mt-1">RANK</span>
+            </a>
+            <!-- ランクA -->
+            <a href="https://www.hotel-fine.co.jp/hotel/gf-toyonakaminami/price/#r_a" class="bg-red-500 text-white p-6 rounded-2xl shadow-lg hover:opacity-90 transition-all flex flex-col items-center">
+                <span class="text-4xl font-black">A</span>
+                <span class="text-xs mt-1">RANK</span>
+            </a>
+            <!-- ランクB -->
+            <a href="https://www.hotel-fine.co.jp/hotel/gf-toyonakaminami/price/#r_b" class="bg-blue-500 text-white p-6 rounded-2xl shadow-lg hover:opacity-90 transition-all flex flex-col items-center">
+                <span class="text-4xl font-black">B</span>
+                <span class="text-xs mt-1">RANK</span>
+            </a>
+            <!-- ランクC -->
+            <a href="https://www.hotel-fine.co.jp/hotel/gf-toyonakaminami/price/#r_c" class="bg-green-500 text-white p-6 rounded-2xl shadow-lg hover:opacity-90 transition-all flex flex-col items-center">
+                <span class="text-4xl font-black">C</span>
+                <span class="text-xs mt-1">RANK</span>
+            </a>
+            <!-- ランクD -->
+            <a href="https://www.hotel-fine.co.jp/hotel/gf-toyonakaminami/price/#r_d" class="bg-purple-500 text-white p-6 rounded-2xl shadow-lg hover:opacity-90 transition-all flex flex-col items-center">
+                <span class="text-4xl font-black">D</span>
+                <span class="text-xs mt-1">RANK</span>
+            </a>
+            <!-- ランクE -->
+            <a href="https://www.hotel-fine.co.jp/hotel/gf-toyonakaminami/price/#r_e" class="bg-gray-600 text-white p-6 rounded-2xl shadow-lg hover:opacity-90 transition-all flex flex-col items-center">
+                <span class="text-4xl font-black">E</span>
+                <span class="text-xs mt-1">RANK</span>
+            </a>
+            <!-- ランクF -->
+            <a href="https://www.hotel-fine.co.jp/hotel/gf-toyonakaminami/price/#r_f" class="bg-black text-white p-6 rounded-2xl shadow-lg hover:opacity-90 transition-all flex flex-col items-center">
+                <span class="text-4xl font-black">F</span>
+                <span class="text-xs mt-1">RANK</span>
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>
