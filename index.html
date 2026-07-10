@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>グランドファイン豊中 - 客室案内</title>
+    <title>グランドファイン豊中</title>
+    <!-- マニフェストとアイコン設定 -->
+    <link rel="manifest" href="manifest.json">
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- style.cssを読み込む -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <div class="bg-white/85 p-8 rounded-3xl backdrop-blur-md shadow-2xl w-full max-w-3xl text-center">
-        <h1 class="text-3xl font-bold text-gray-800 mb-2">グランドファイン豊中</h1>
-        <p class="text-gray-600 mb-8">客室ランクを選択してください</p>
+        <!-- ロゴ表示を追加 -->
+        <img src="toyonaka.png" alt="Logo" class="mx-auto h-16 mb-4">
+        <h1 class="text-3xl font-bold text-gray-800 mb-8">グランドファイン豊中</h1>
         
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <!-- ランクS〜Fはそのまま -->
+            <!-- 各ランクボタンはそのまま -->
             <a href="https://www.hotel-fine.co.jp/hotel/gf-toyonakaminami/price/#r_s" class="bg-yellow-500 text-white p-6 rounded-2xl shadow-lg hover:opacity-90 transition-all">S</a>
             <a href="https://www.hotel-fine.co.jp/hotel/gf-toyonakaminami/price/#r_a" class="bg-red-500 text-white p-6 rounded-2xl shadow-lg hover:opacity-90 transition-all">A</a>
             <a href="https://www.hotel-fine.co.jp/hotel/gf-toyonakaminami/price/#r_b" class="bg-blue-500 text-white p-6 rounded-2xl shadow-lg hover:opacity-90 transition-all">B</a>
@@ -25,8 +26,6 @@
             <a href="https://www.hotel-fine.co.jp/hotel/gf-toyonakaminami/price/#r_f" class="bg-black text-white p-6 rounded-2xl shadow-lg hover:opacity-90 transition-all">F</a>
         </div>
     </div>
-
-    <!-- App.jsを読み込む -->
     <script src="App.js"></script>
 </body>
 </html>
