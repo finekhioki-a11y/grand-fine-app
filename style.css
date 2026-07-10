@@ -1,10 +1,14 @@
+/* style.css */
 body {
-    background-image: url('gf-toyonakaminami_main_01.jpg'); /* 拡張子を確認してください */
+    background-image: url('gf-toyonakaminami_main_01.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     min-height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: center;
+    /* 下に寄せる設定 */
+    justify-content: flex-end; 
+    padding-bottom: 50px;
+    flex-direction: column;
 }
