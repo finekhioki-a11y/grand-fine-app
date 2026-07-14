@@ -11,22 +11,44 @@
     <!-- ロゴ -->
     <img src="gftoyonaka_w.jpg" alt="グランドファイン豊中" class="mx-auto h-12 mb-4">
     
-    <!-- ホテナビの空室状況を直接表示する窓 -->
-    <div class="mb-6 overflow-hidden rounded-xl border-2 border-amber-200">
-      <iframe src="https://www.hotenavi.com/fine017/empty" class="w-full h-48"></iframe>
+    <!-- 空室表示エリアを一旦クリア（JavaScriptで制御） -->
+    <div id="status-display" class="mb-6 p-4 bg-amber-50 rounded-xl font-bold text-amber-900 border border-amber-200">
+      最新情報を確認中...
     </div>
 
     <h1 class="text-lg font-bold text-gray-800 mb-4">メニューを選択</h1>
     <div class="grid grid-cols-2 gap-4">
-      <a href="https://www.hotenavi.com/fine017/" class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+      <!-- 公式HPリンクを修正 -->
+      <a href="https://www.hotel-fine.co.jp/hotel/gf-toyonakaminami/" class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
         <div class="text-4xl mb-2">🏠</div>
         <div class="font-bold text-gray-700">公式HP</div>
       </a>
-      <a href="rooms.html" class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+      <!-- ハピホテリンクを削除 -->
+      <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 opacity-50 cursor-not-allowed">
         <div class="text-4xl mb-2">🛋️</div>
         <div class="font-bold text-gray-700">お部屋・設備案内</div>
-      </a>
+      </div>
     </div>
   </div>
+
+  <script>
+    const WORKER_URL = 'https://divine-wave-9d51.fine-k-hioki.workers.dev/';
+
+    fetch(WORKER_URL)
+      .then(res => res.json())
+      .then(data => {
+        // データが取得できた場合のみ表示し、空ならメッセージを出す
+        if (data.empty !== undefined && data.empty !== "0") {
+          document.getElementById('status-display').innerHTML = 
+            '空室: <span class="text-2xl">' + data.empty + '</span>室 / ' +
+            '準備中: <span class="text-2xl">' + data.ready + '</span>室';
+        } else {
+          document.getElementById('status-display').textContent = '現在、空室情報は取得できません';
+        }
+      })
+      .catch(() => {
+        document.getElementById('status-display').textContent = '情報取得エラー';
+      });
+  </script>
 </body>
 </html>
