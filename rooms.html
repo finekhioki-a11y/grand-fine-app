@@ -9,11 +9,12 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="style.css">
   <style>
+    /* 長押し時のメニューや選択を無効化 */
     .room-btn {
       -webkit-touch-callout: none;
       -webkit-user-select: none;
       user-select: none;
-      touch-action: none; /* 指の動きをブラウザに渡さない */
+      touch-action: manipulation;
     }
   </style>
 </head>
@@ -30,7 +31,7 @@
       </div>
       <p id="summary" class="text-sm text-gray-600 mb-4"></p>
       <div id="features" class="grid grid-cols-3 gap-3 mb-6 text-center"></div>
-      <h3 class="text-sm font-bold text-gray-700 mb-3">部屋番号を選択</h3>
+      <h3 class="text-sm font-bold text-gray-700 mb-3">部屋番号を選択（長押しで在室切替）</h3>
       <div id="rooms" class="grid grid-cols-4 gap-2"></div>
       <p id="note" class="mt-3 text-xs text-gray-500"></p>
     </section>
@@ -73,27 +74,30 @@
       container.innerHTML = '';
       roomList.forEach(room => {
         const isOccupied = statusData[room];
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = `${isOccupied ? 'bg-gray-400' : 'bg-amber-900'} text-white p-3 rounded-lg text-center text-sm font-bold room-btn`;
-        btn.innerHTML = `${room} ${isOccupied ? '/ 在室' : ''}`;
+        const a = document.createElement('a');
+        a.className = `${isOccupied ? 'bg-gray-400' : 'bg-amber-900'} text-white p-3 rounded-lg text-center text-sm font-bold room-btn`;
+        a.innerHTML = `${room} ${isOccupied ? '/ 在室' : ''}`;
+        a.href = `https://happyhotel.jp/hotels/610527/rooms/${room}`;
         
-        const toggle = () => {
-          statusData[room] = !statusData[room];
-          localStorage.setItem('roomStatus', JSON.stringify(statusData));
-          showType(document.getElementById('title').textContent.replace('タイプ', ''));
+        let timer;
+        let isLongPress = false;
+
+        a.ontouchstart = (e) => {
+          isLongPress = false;
+          timer = setTimeout(() => {
+            isLongPress = true;
+            statusData[room] = !statusData[room];
+            localStorage.setItem('roomStatus', JSON.stringify(statusData));
+            showType(document.getElementById('title').textContent.replace('タイプ', ''));
+          }, 500);
         };
 
-        let timer;
-        btn.ontouchstart = (e) => {
-          e.preventDefault(); // これが最重要：ブラウザのメニュー出しを阻止
-          timer = setTimeout(toggle, 500);
+        a.ontouchend = (e) => {
+          clearTimeout(timer);
+          if (isLongPress) e.preventDefault(); // 長押し時は遷移を止める
         };
-        btn.ontouchend = (e) => { e.preventDefault(); clearTimeout(timer); };
-        btn.ontouchmove = (e) => { e.preventDefault(); clearTimeout(timer); };
-        btn.oncontextmenu = (e) => { e.preventDefault(); };
         
-        container.appendChild(btn);
+        container.appendChild(a);
       });
     }
   </script>
