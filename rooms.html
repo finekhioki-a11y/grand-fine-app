@@ -9,12 +9,11 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="style.css">
   <style>
-    /* 長押しや選択を無効化して操作性を高める */
     .room-btn {
       -webkit-touch-callout: none;
       -webkit-user-select: none;
       user-select: none;
-      touch-action: manipulation;
+      touch-action: none; /* 指の動きをブラウザに渡さない */
     }
   </style>
 </head>
@@ -79,23 +78,20 @@
         btn.className = `${isOccupied ? 'bg-gray-400' : 'bg-amber-900'} text-white p-3 rounded-lg text-center text-sm font-bold room-btn`;
         btn.innerHTML = `${room} ${isOccupied ? '/ 在室' : ''}`;
         
-        // 処理の共通化
         const toggle = () => {
           statusData[room] = !statusData[room];
           localStorage.setItem('roomStatus', JSON.stringify(statusData));
           showType(document.getElementById('title').textContent.replace('タイプ', ''));
         };
 
-        // 長押しイベント
         let timer;
         btn.ontouchstart = (e) => {
+          e.preventDefault(); // これが最重要：ブラウザのメニュー出しを阻止
           timer = setTimeout(toggle, 500);
         };
-        btn.ontouchend = () => clearTimeout(timer);
-        btn.ontouchmove = () => clearTimeout(timer); // 指が動いたらキャンセル
-        
-        // PC用右クリック
-        btn.oncontextmenu = (e) => { e.preventDefault(); toggle(); };
+        btn.ontouchend = (e) => { e.preventDefault(); clearTimeout(timer); };
+        btn.ontouchmove = (e) => { e.preventDefault(); clearTimeout(timer); };
+        btn.oncontextmenu = (e) => { e.preventDefault(); };
         
         container.appendChild(btn);
       });
