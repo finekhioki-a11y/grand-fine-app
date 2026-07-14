@@ -8,15 +8,6 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="style.css">
-  <style>
-    /* 長押し時のメニューや選択を無効化 */
-    .room-btn {
-      -webkit-touch-callout: none;
-      -webkit-user-select: none;
-      user-select: none;
-      touch-action: manipulation;
-    }
-  </style>
 </head>
 <body>
   <div class="bg-white/85 p-6 rounded-3xl backdrop-blur-md shadow-2xl w-full max-w-lg text-center">
@@ -31,15 +22,12 @@
       </div>
       <p id="summary" class="text-sm text-gray-600 mb-4"></p>
       <div id="features" class="grid grid-cols-3 gap-3 mb-6 text-center"></div>
-      <h3 class="text-sm font-bold text-gray-700 mb-3">部屋番号を選択（長押しで在室切替）</h3>
+      <h3 class="text-sm font-bold text-gray-700 mb-3">部屋番号を選択</h3>
       <div id="rooms" class="grid grid-cols-4 gap-2"></div>
       <p id="note" class="mt-3 text-xs text-gray-500"></p>
     </section>
   </div>
-
   <script>
-    let statusData = JSON.parse(localStorage.getItem('roomStatus')) || {};
-
     const types = {
       S:{rooms:['602'],summary:'最上階・広いお部屋',features:[['apartment','最上階'],['king_bed','部屋広い'],['hot_tub','円形ジャグジー'],['shower','ミラブル'],['chair','マッサージチェア'],['tv','65インチ'],['speaker','音響良い']]},
       A:{rooms:['302','307','407','501','502','503','603'],summary:'広めのお部屋・ユニットバス',features:[['king_bed','部屋広め'],['bathtub','ユニットバス'],['shower','ミラブル'],['chair','マッサージチェア'],['tv','50インチ以上']],note:'※307号室にはマッサージチェアがありません。'},
@@ -50,7 +38,6 @@
       F:{rooms:['208','210','308','310','410','411','508','510'],summary:'コンパクトなお部屋',features:[['single_bed','部屋狭め'],['tv','40インチ']]},
       G:{rooms:['505'],summary:'505号室',features:[],note:'設備情報は準備中です。'}
     };
-
     const ranks = document.getElementById('ranks');
     Object.keys(types).forEach(rank => {
       const button = document.createElement('button');
@@ -58,47 +45,14 @@
       button.className = 'bg-amber-900 text-white p-2 rounded-lg text-xs font-bold';
       button.onclick = () => showType(rank); ranks.appendChild(button);
     });
-
     function showType(rank) {
-      const type = types[rank]; 
-      document.getElementById('details').classList.remove('hidden');
+      const type = types[rank]; document.getElementById('details').classList.remove('hidden');
       document.getElementById('title').textContent = rank + 'タイプ';
       document.getElementById('count').textContent = type.rooms.length + '室';
       document.getElementById('summary').textContent = type.summary;
       document.getElementById('features').innerHTML = type.features.map(([icon,label]) => `<div class="rounded-xl bg-stone-50 p-3"><span class="material-symbols-outlined text-3xl text-amber-900">${icon}</span><div class="mt-1 text-xs font-bold text-gray-700">${label}</div></div>`).join('') || '<p class="col-span-3 text-sm text-gray-500">設備情報は準備中です。</p>';
-      renderRooms(type.rooms);
-    }
-
-    function renderRooms(roomList) {
-      const container = document.getElementById('rooms');
-      container.innerHTML = '';
-      roomList.forEach(room => {
-        const isOccupied = statusData[room];
-        const a = document.createElement('a');
-        a.className = `${isOccupied ? 'bg-gray-400' : 'bg-amber-900'} text-white p-3 rounded-lg text-center text-sm font-bold room-btn`;
-        a.innerHTML = `${room} ${isOccupied ? '/ 在室' : ''}`;
-        a.href = `https://happyhotel.jp/hotels/610527/rooms/${room}`;
-        
-        let timer;
-        let isLongPress = false;
-
-        a.ontouchstart = (e) => {
-          isLongPress = false;
-          timer = setTimeout(() => {
-            isLongPress = true;
-            statusData[room] = !statusData[room];
-            localStorage.setItem('roomStatus', JSON.stringify(statusData));
-            showType(document.getElementById('title').textContent.replace('タイプ', ''));
-          }, 500);
-        };
-
-        a.ontouchend = (e) => {
-          clearTimeout(timer);
-          if (isLongPress) e.preventDefault(); // 長押し時は遷移を止める
-        };
-        
-        container.appendChild(a);
-      });
+      document.getElementById('rooms').innerHTML = type.rooms.map(room => `<a class="bg-amber-900 text-white p-3 rounded-lg text-center text-sm font-bold" href="https://happyhotel.jp/hotels/610527/rooms/${room}">${room}</a>`).join('');
+      document.getElementById('note').textContent = type.note || '';
     }
   </script>
 </body>
