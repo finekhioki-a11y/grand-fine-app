@@ -1,38 +1,52 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#78350f">
-  <title>グランドファイン豊中</title>
-  <link rel="manifest" href="manifest.json">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400,0,0">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body class="min-h-screen bg-stone-100 px-4 py-8 text-stone-800">
+
   <main class="mx-auto w-full max-w-lg rounded-3xl bg-white/90 p-6 shadow-2xl backdrop-blur-md">
     <img src="gftoyonaka_w.jpg" alt="グランドファイン豊中" class="mx-auto mb-6 h-12 object-contain">
 
     <section aria-labelledby="rank-heading">
       <h1 id="rank-heading" class="mb-3 text-sm font-bold text-stone-700">お部屋タイプを選択</h1>
       <div id="rank-buttons" class="grid grid-cols-4 gap-2"></div>
+    <section id="home-menu" aria-labelledby="menu-heading">
+      <h1 id="menu-heading" class="mb-5 text-xl font-bold text-stone-800">メニューを選択</h1>
+      <div class="grid grid-cols-2 gap-4 border-t border-stone-200 pt-5">
+        <a href="https://www.hotel-fine.co.jp/hotel/gf-toyonakaminami/" class="flex flex-col items-center rounded-xl py-3 transition hover:bg-stone-100">
+          <span class="text-4xl" aria-hidden="true">🏨</span>
+          <span class="mt-2 text-sm font-bold text-stone-700">公式HP</span>
+        </a>
+        <button id="open-room-guide" type="button" class="flex flex-col items-center rounded-xl py-3 transition hover:bg-stone-100">
+          <span class="text-4xl" aria-hidden="true">🛋️</span>
+          <span class="mt-2 text-sm font-bold text-stone-700">お部屋・設備案内</span>
+        </button>
+      </div>
     </section>
 
     <section id="room-panel" class="mt-6 hidden border-t border-stone-200 pt-5" aria-live="polite">
       <div class="mb-4 flex items-center justify-between">
         <h2 id="rank-title" class="text-xl font-bold text-amber-900"></h2>
         <span id="room-count" class="rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-900"></span>
+      <div class="mb-5 flex items-center justify-between gap-3">
+        <button id="back-to-menu" type="button" class="rounded-lg border border-stone-300 px-3 py-2 text-xs font-bold text-stone-600 transition hover:bg-stone-100">← メニュー</button>
+        <h2 class="text-xl font-bold text-amber-900">お部屋・設備案内</h2>
       </div>
       <p id="rank-description" class="mb-5 text-sm leading-6 text-stone-600"></p>
+      <h3 class="mb-3 text-sm font-bold text-stone-700">お部屋タイプを選択</h3>
+      <div id="rank-buttons" class="mb-6 grid grid-cols-4 gap-2"></div>
+      <div id="detail-content" class="hidden border-t border-stone-200 pt-5">
+        <div class="mb-4 flex items-center justify-between">
+          <h3 id="rank-title" class="text-xl font-bold text-amber-900"></h3>
+          <span id="room-count" class="rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-900"></span>
+        </div>
+        <p id="rank-description" class="mb-5 text-sm leading-6 text-stone-600"></p>
 
       <div id="features" class="mb-6 grid grid-cols-3 gap-3"></div>
+        <div id="features" class="mb-6 grid grid-cols-3 gap-3"></div>
 
       <h3 class="mb-3 text-sm font-bold text-stone-700">部屋番号を選択</h3>
       <div id="room-buttons" class="grid grid-cols-4 gap-2"></div>
       <p id="room-note" class="mt-3 text-xs leading-5 text-stone-500"></p>
+        <h3 class="mb-3 text-sm font-bold text-stone-700">部屋番号を選択</h3>
+        <div id="room-buttons" class="grid grid-cols-4 gap-2"></div>
+        <p id="room-note" class="mt-3 text-xs leading-5 text-stone-500"></p>
+      </div>
     </section>
 
     <nav class="mt-7 grid grid-cols-2 gap-4 border-t border-stone-200 pt-5" aria-label="関連ページ">
@@ -48,53 +62,35 @@
   </main>
 
   <script>
-    const roomTypes = {
-      S: {
-        rooms: ['602'], description: '最上階・広いお部屋',
-        features: [['apartment', '最上階'], ['king_bed', '部屋広い'], ['hot_tub', '円形ジャグジー'], ['shower', 'ミラブル'], ['chair', 'マッサージチェア'], ['tv', '65インチ'], ['speaker', '音響良い']]
-      },
-      A: {
-        rooms: ['302', '307', '407', '501', '502', '503', '603'], description: '広めのお部屋・ユニットバス',
-        features: [['king_bed', '部屋広め'], ['bathtub', 'ユニットバス'], ['shower', 'ミラブル'], ['chair', 'マッサージチェア'], ['tv', '50インチ以上']],
-        note: '※307号室にはマッサージチェアがありません。'
-      },
-      B: {
-        rooms: ['506'], description: '広めのお部屋・ビリヤード付き',
-        features: [['king_bed', '部屋広め'], ['sports_score', 'ビリヤード'], ['shower', 'ミラブル'], ['chair', 'マッサージチェア'], ['tv', '60インチ']]
-      },
-      C: {
-        rooms: ['311', '412', '601'], description: '広めのお部屋',
-        features: [['king_bed', '部屋広め'], ['shower', 'ミラブル'], ['chair', 'マッサージチェア'], ['tv', '50インチ']]
-      },
-      D: {
-        rooms: ['203', '205', '206', '211', '301', '303', '306', '401', '403', '405', '408', '507'], description: '広めのお部屋',
-        features: [['king_bed', '部屋広め'], ['chair', 'マッサージチェア'], ['tv', '40インチ以上']]
-      },
-      E: {
-        rooms: ['201', '202', '207', '305', '406', '511'], description: '広めのお部屋',
-        features: [['king_bed', '部屋広め'], ['tv', '40インチ以上']]
-      },
-      F: {
-        rooms: ['208', '210', '308', '310', '410', '411', '508', '510'], description: 'コンパクトなお部屋',
-        features: [['single_bed', '部屋狭め'], ['tv', '40インチ']]
-      },
-      G: {
-        rooms: ['505'], description: '505号室', features: [],
-        note: '設備情報は準備中です。'
-      }
-    };
-
-    const rankButtons = document.getElementById('rank-buttons');
-    const panel = document.getElementById('room-panel');
-    const title = document.getElementById('rank-title');
-    const count = document.getElementById('room-count');
-    const description = document.getElementById('rank-description');
     const features = document.getElementById('features');
     const roomButtons = document.getElementById('room-buttons');
     const note = document.getElementById('room-note');
+    const homeMenu = document.getElementById('home-menu');
+    const detailContent = document.getElementById('detail-content');
 
     Object.keys(roomTypes).forEach((rank) => {
       const button = document.createElement('button');
-      button.type = 'button';
-      button.textContent = rank;
-      button.dataset.rank = rank;
+    function showRooms(rank) {
+      const type = roomTypes[rank];
+      panel.classList.remove('hidden');
+      detailContent.classList.remove('hidden');
+      title.textContent = `${rank}タイプ`;
+      count.textContent = `${type.rooms.length}室`;
+      description.textContent = type.description;
+      });
+      panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    document.getElementById('open-room-guide').addEventListener('click', () => {
+      homeMenu.classList.add('hidden');
+      panel.classList.remove('hidden');
+    });
+
+    document.getElementById('back-to-menu').addEventListener('click', () => {
+      panel.classList.add('hidden');
+      detailContent.classList.add('hidden');
+      homeMenu.classList.remove('hidden');
+    });
+  </script>
+</body>
+</html>
