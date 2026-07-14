@@ -1,65 +1,65 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>お部屋タイプを選択 - グランドファイン豊中</title>
-  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 p-4">
-  <div class="bg-white/85 p-6 rounded-3xl shadow-2xl w-full max-w-lg mx-auto text-center relative">
-    
-    <!-- 左上の「メニュー」リンク -->
-    <a href="index.html" class="absolute left-6 top-6 text-gray-700 font-bold hover:text-gray-900 transition flex items-center">
-      <span class="text-xl mr-1">←</span>メニュー
-    </a>
-
-    <!-- 右上にあった「空き室: undefined室」の表示エリアは完全に削除しました -->
-
-    <!-- ロゴ -->
-    <img src="gftoyonaka_w.jpg" alt="グランドファイン豊中" class="mx-auto h-12 mb-6 mt-12">
-    
-    <h1 class="text-xl font-bold text-gray-800 mb-6">お部屋タイプを選択</h1>
-    
-    <!-- タイプ選択ボタン -->
-    <div class="grid grid-cols-4 gap-2 mb-8">
-      <div class="bg-amber-900 text-white py-3 rounded-lg font-bold">S</div>
-      <div class="bg-amber-900 text-white py-3 rounded-lg font-bold">A</div>
-      <div class="bg-amber-900 text-white py-3 rounded-lg font-bold">B</div>
-      <div class="bg-amber-900 text-white py-3 rounded-lg font-bold">C</div>
-      <div class="bg-amber-900 text-white py-3 rounded-lg font-bold">D</div>
-      <div class="bg-amber-900 text-white py-3 rounded-lg font-bold">E</div>
-      <div class="bg-amber-900 text-white py-3 rounded-lg font-bold">F</div>
-      <div class="bg-amber-900 text-white py-3 rounded-lg font-bold">G</div>
-    </div>
-    
-    <div class="border-t border-gray-200 my-8"></div>
-
-    <!-- Eタイプの詳細（例） -->
-    <div class="text-left bg-white p-6 rounded-2xl shadow-sm border border-gray-100 mb-6">
-      <div class="flex justify-between items-center mb-4">
-        <h2 class="text-2xl font-bold text-gray-800">Eタイプ</h2>
-        <span class="bg-amber-50 text-amber-900 px-3 py-1 rounded-full text-sm font-bold">6室</span>
-      </div>
-      <p class="text-gray-600 mb-6">広めのお部屋で、ゆったりとお過ごしいただけます。</p>
-      
-      <div class="flex items-center gap-6 mb-6 text-gray-700">
-        <div class="flex items-center"><span class="text-3xl mr-2">🛏️</span> 部屋広め</div>
-        <div class="flex items-center"><span class="text-3xl mr-2">📺</span> 40インチ以上</div>
-      </div>
-      
-      <p class="font-bold text-gray-700 mb-3">お部屋番号:</p>
-      <div class="flex flex-wrap gap-2">
-        <div class="bg-amber-900 text-white px-4 py-2 rounded-lg font-bold">201</div>
-        <div class="bg-amber-900 text-white px-4 py-2 rounded-lg font-bold">202</div>
-        <div class="bg-amber-900 text-white px-4 py-2 rounded-lg font-bold">207</div>
-        <div class="bg-amber-900 text-white px-4 py-2 rounded-lg font-bold">305</div>
-        <div class="bg-amber-900 text-white px-4 py-2 rounded-lg font-bold">406</div>
-        <div class="bg-amber-900 text-white px-4 py-2 rounded-lg font-bold">511</div>
+<body>
+<div class="bg-white/85 p-6 rounded-3xl backdrop-blur-md shadow-2xl w-full max-w-lg text-center">
+    <a href="index.html" class="inline-block mb-4 text-sm font-bold text-amber-900">← メニューへ戻る</a>
+    <div class="flex justify-between items-center mb-4">
+      <a href="index.html" class="text-sm font-bold text-amber-900">← メニューへ戻る</a>
+      <div id="status-display" class="text-xs font-bold text-amber-900 bg-amber-100 px-3 py-1 rounded-full">
+        空室確認中...
       </div>
     </div>
+<img src="gftoyonaka_w.jpg" alt="グランドファイン豊中" class="mx-auto h-12 mb-6">
+<h1 class="text-xl font-bold text-gray-800 mb-4">お部屋タイプを選択</h1>
+<div id="ranks" class="grid grid-cols-4 gap-2 mb-6"></div>
+@@ -27,7 +32,21 @@
+<p id="note" class="mt-3 text-xs text-gray-500"></p>
+</section>
+</div>
 
-    <!-- ここにあった「scriptタグ」は完全に削除しました -->
-  </div>
+<script>
+    // 自動取得用URL
+    const WORKER_URL = 'https://divine-wave-9d51.fine-k-hioki.workers.dev/';
+
+    // ホテナビから空室情報を取得
+    fetch(WORKER_URL)
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('status-display').textContent = '現在の空室: ' + data.count + '室';
+      })
+      .catch(() => {
+        document.getElementById('status-display').textContent = '取得エラー';
+      });
+
+const types = {
+S:{rooms:['602'],summary:'最上階・広いお部屋',features:[['apartment','最上階'],['king_bed','部屋広い'],['hot_tub','円形ジャグジー'],['shower','ミラブル'],['chair','マッサージチェア'],['tv','65インチ'],['speaker','音響良い']]},
+A:{rooms:['302','307','407','501','502','503','603'],summary:'広めのお部屋・ユニットバス',features:[['king_bed','部屋広め'],['bathtub','ユニットバス'],['shower','ミラブル'],['chair','マッサージチェア'],['tv','50インチ以上']],note:'※307号室にはマッサージチェアがありません。'},
+@@ -38,21 +57,26 @@
+F:{rooms:['208','210','308','310','410','411','508','510'],summary:'コンパクトなお部屋',features:[['single_bed','部屋狭め'],['tv','40インチ']]},
+G:{rooms:['505'],summary:'505号室',features:[],note:'設備情報は準備中です。'}
+};
+
+const ranks = document.getElementById('ranks');
+Object.keys(types).forEach(rank => {
+const button = document.createElement('button');
+      button.type = 'button'; button.textContent = rank;
+      button.type = 'button'; 
+      button.textContent = rank;
+button.className = 'bg-amber-900 text-white p-2 rounded-lg text-xs font-bold';
+      button.onclick = () => showType(rank); ranks.appendChild(button);
+      button.onclick = () => showType(rank); 
+      ranks.appendChild(button);
+});
+
+function showType(rank) {
+      const type = types[rank]; document.getElementById('details').classList.remove('hidden');
+      const type = types[rank]; 
+      document.getElementById('details').classList.remove('hidden');
+document.getElementById('title').textContent = rank + 'タイプ';
+document.getElementById('count').textContent = type.rooms.length + '室';
+document.getElementById('summary').textContent = type.summary;
+document.getElementById('features').innerHTML = type.features.map(([icon,label]) => `<div class="rounded-xl bg-stone-50 p-3"><span class="material-symbols-outlined text-3xl text-amber-900">${icon}</span><div class="mt-1 text-xs font-bold text-gray-700">${label}</div></div>`).join('') || '<p class="col-span-3 text-sm text-gray-500">設備情報は準備中です。</p>';
+document.getElementById('rooms').innerHTML = type.rooms.map(room => `<a class="bg-amber-900 text-white p-3 rounded-lg text-center text-sm font-bold" href="https://happyhotel.jp/hotels/610527/rooms/${room}">${room}</a>`).join('');
+document.getElementById('note').textContent = type.note || '';
+}
+</script>
 </body>
-</html>
