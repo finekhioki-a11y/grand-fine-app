@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お部屋・設備案内｜グランドファイン豊中</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="bg-white/85 p-6 rounded-3xl backdrop-blur-md shadow-2xl w-full max-w-lg text-center">
+    <a href="index.html" class="inline-block mb-4 text-sm font-bold text-amber-900">← メニューへ戻る</a>
+    <img src="gftoyonaka_w.jpg" alt="グランドファイン豊中" class="mx-auto h-12 mb-6">
+    <h1 class="text-xl font-bold text-gray-800 mb-4">お部屋タイプを選択</h1>
+    <div id="ranks" class="grid grid-cols-4 gap-2 mb-6"></div>
+    <section id="details" class="hidden border-t pt-5 text-left">
+      <div class="flex items-center justify-between mb-3">
+        <h2 id="title" class="text-xl font-bold text-amber-900"></h2>
+        <span id="count" class="rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-900"></span>
+      </div>
+      <p id="summary" class="text-sm text-gray-600 mb-4"></p>
+      <div id="features" class="grid grid-cols-3 gap-3 mb-6 text-center"></div>
+      <h3 class="text-sm font-bold text-gray-700 mb-3">部屋番号を選択</h3>
+      <div id="rooms" class="grid grid-cols-4 gap-2"></div>
+      <p id="note" class="mt-3 text-xs text-gray-500"></p>
+    </section>
+  </div>
+  <script>
+    const types = {
+      S:{rooms:['602'],summary:'最上階・広いお部屋',features:[['apartment','最上階'],['king_bed','部屋広い'],['hot_tub','円形ジャグジー'],['shower','ミラブル'],['chair','マッサージチェア'],['tv','65インチ'],['speaker','音響良い']]},
+      A:{rooms:['302','307','407','501','502','503','603'],summary:'広めのお部屋・ユニットバス',features:[['king_bed','部屋広め'],['bathtub','ユニットバス'],['shower','ミラブル'],['chair','マッサージチェア'],['tv','50インチ以上']],note:'※307号室にはマッサージチェアがありません。'},
+      B:{rooms:['506'],summary:'広めのお部屋・ビリヤード付き',features:[['king_bed','部屋広め'],['sports_score','ビリヤード'],['shower','ミラブル'],['chair','マッサージチェア'],['tv','60インチ']]},
+      C:{rooms:['311','412','601'],summary:'広めのお部屋',features:[['king_bed','部屋広め'],['shower','ミラブル'],['chair','マッサージチェア'],['tv','50インチ']]},
+      D:{rooms:['203','205','206','211','301','303','306','401','403','405','408','507'],summary:'広めのお部屋',features:[['king_bed','部屋広め'],['chair','マッサージチェア'],['tv','40インチ以上']]},
+      E:{rooms:['201','202','207','305','406','511'],summary:'広めのお部屋',features:[['king_bed','部屋広め'],['tv','40インチ以上']]},
+      F:{rooms:['208','210','308','310','410','411','508','510'],summary:'コンパクトなお部屋',features:[['single_bed','部屋狭め'],['tv','40インチ']]},
+      G:{rooms:['505'],summary:'505号室',features:[],note:'設備情報は準備中です。'}
+    };
+    const ranks = document.getElementById('ranks');
+    Object.keys(types).forEach(rank => {
+      const button = document.createElement('button');
+      button.type = 'button'; button.textContent = rank;
+      button.className = 'bg-amber-900 text-white p-2 rounded-lg text-xs font-bold';
+      button.onclick = () => showType(rank); ranks.appendChild(button);
+    });
+    function showType(rank) {
+      const type = types[rank]; document.getElementById('details').classList.remove('hidden');
+      document.getElementById('title').textContent = rank + 'タイプ';
+      document.getElementById('count').textContent = type.rooms.length + '室';
+      document.getElementById('summary').textContent = type.summary;
+      document.getElementById('features').innerHTML = type.features.map(([icon,label]) => `<div class="rounded-xl bg-stone-50 p-3"><span class="material-symbols-outlined text-3xl text-amber-900">${icon}</span><div class="mt-1 text-xs font-bold text-gray-700">${label}</div></div>`).join('') || '<p class="col-span-3 text-sm text-gray-500">設備情報は準備中です。</p>';
+      document.getElementById('rooms').innerHTML = type.rooms.map(room => `<a class="bg-amber-900 text-white p-3 rounded-lg text-center text-sm font-bold" href="https://happyhotel.jp/hotels/610527/rooms/${room}">${room}</a>`).join('');
+      document.getElementById('note').textContent = type.note || '';
+    }
+  </script>
+</body>
+</html>
