@@ -11,12 +11,8 @@
     <!-- ロゴ -->
     <img src="gftoyonaka_w.jpg" alt="グランドファイン豊中" class="mx-auto h-12 mb-4">
     
-    <!-- 空室表示エリア -->
-    <div id="status-display" class="mb-6 p-4 bg-amber-50 rounded-xl font-bold text-amber-900 border border-amber-200">
-      最新情報を確認中...
-    </div>
-
-    <h1 class="text-lg font-bold text-gray-800 mb-4">メニューを選択</h1>
+    <h1 class="text-lg font-bold text-gray-800 mb-6">メニューを選択</h1>
+    
     <div class="grid grid-cols-2 gap-4">
       <!-- 公式HP -->
       <a href="https://www.hotel-fine.co.jp/hotel/gf-toyonakaminami/" class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
@@ -30,24 +26,5 @@
       </a>
     </div>
   </div>
-
-  <script>
-    const WORKER_URL = 'https://divine-wave-9d51.fine-k-hioki.workers.dev/';
-
-    fetch(WORKER_URL)
-      .then(res => res.json())
-      .then(data => {
-        if (data.empty && data.empty !== "確認中") {
-          document.getElementById('status-display').innerHTML = 
-            '空室: <span class="text-2xl">' + data.empty + '</span>室 / ' +
-            '準備中: <span class="text-2xl">' + data.ready + '</span>室';
-        } else {
-          document.getElementById('status-display').style.display = 'none';
-        }
-      })
-      .catch(() => {
-        document.getElementById('status-display').style.display = 'none';
-      });
-  </script>
 </body>
 </html>
