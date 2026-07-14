@@ -11,9 +11,9 @@
     <!-- ロゴ -->
     <img src="gftoyonaka_w.jpg" alt="グランドファイン豊中" class="mx-auto h-12 mb-4">
     
-    <!-- 空室表示：ここに自動で数字が入ります -->
+    <!-- 空室表示：トップ画面のみに配置 -->
     <div id="status-display" class="mb-6 p-3 bg-amber-100 rounded-xl font-bold text-amber-900 border border-amber-200">
-      空室情報取得中...
+      空室状況を取得中...
     </div>
 
     <h1 class="text-lg font-bold text-gray-800 mb-4">メニューを選択</h1>
@@ -38,7 +38,7 @@
         document.getElementById('status-display').textContent = '現在の空室: ' + data.count + '室';
       })
       .catch(() => {
-        document.getElementById('status-display').textContent = '空室情報: 通信エラー';
+        document.getElementById('status-display').textContent = '空室情報を確認できません';
       });
   </script>
 </body>
