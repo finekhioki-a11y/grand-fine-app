@@ -1,10 +1,45 @@
 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#78350f">
+  <meta name="theme-color" content="#7c330e">
+  <title>グランドファイン豊中</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400,0,0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; background: #f5f1ed; color: #35291f; font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif; }
+    .app { width: min(100%, 520px); min-height: 100vh; margin: auto; padding: 24px 18px; background: rgba(255,255,255,.9); }
+    .logo { display: block; width: auto; max-width: 75%; height: 76px; object-fit: contain; margin: 0 auto 32px; }
+    .card { padding: 28px 20px; border-radius: 28px; background: #fff; box-shadow: 0 14px 36px rgba(75,45,21,.14); }
+    h1, h2, h3, p { margin-top: 0; } h1 { margin-bottom: 24px; font-size: 23px; } h2 { margin-bottom: 20px; font-size: 21px; color: #7c330e; } h3 { margin-bottom: 12px; font-size: 15px; }
+    .home-links { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; border-top: 1px solid #e7ddd3; padding-top: 22px; }
+    .home-link, .menu-button { display: flex; min-height: 112px; flex-direction: column; align-items: center; justify-content: center; gap: 10px; border: 0; border-radius: 16px; background: #fff9f3; color: #35291f; font: inherit; font-weight: 700; text-decoration: none; cursor: pointer; }
+    .home-link:active, .menu-button:active, .rank-button:active, .room-link:active { transform: scale(.98); }
+    .home-icon { font-size: 39px; } .back { margin-bottom: 20px; padding: 8px 12px; border: 1px solid #cfc2b6; border-radius: 8px; background: #fff; color: #5f5146; font-weight: 700; cursor: pointer; }
+    .rank-grid, .room-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px; }
+    .rank-button, .room-link { padding: 13px 5px; border: 0; border-radius: 9px; background: #7c330e; color: #fff; font: inherit; font-weight: 700; text-align: center; text-decoration: none; cursor: pointer; }
+    .rank-button.active { outline: 3px solid #efbd51; }
+    .details { margin-top: 24px; padding-top: 22px; border-top: 1px solid #e7ddd3; }
+    .detail-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; } .detail-head h2 { margin: 0; }
+    .count { border-radius: 999px; padding: 5px 10px; background: #f9e6b9; color: #7c330e; font-size: 12px; font-weight: 700; white-space: nowrap; }
+    .description { margin: 16px 0 18px; color: #68594d; line-height: 1.7; }
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 24px; }
+    .feature { display: flex; min-height: 88px; flex-direction: column; align-items: center; justify-content: center; gap: 7px; border-radius: 12px; background: #faf7f4; text-align: center; }
+    .material-symbols-outlined { color: #7c330e; font-size: 31px; } .feature span:last-child { font-size: 12px; font-weight: 700; }
+    .note { margin: 12px 0 0; color: #796c62; font-size: 12px; line-height: 1.6; }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body class="min-h-screen bg-stone-100 px-4 py-8 text-stone-800">
   <main class="mx-auto w-full max-w-lg rounded-3xl bg-white/90 p-6 shadow-2xl backdrop-blur-md">
     <img src="gftoyonaka_w.jpg" alt="グランドファイン豊中" class="mx-auto mb-6 h-12 object-contain">
 
-    <section aria-labelledby="rank-heading">
-      <h1 id="rank-heading" class="mb-3 text-sm font-bold text-stone-700">お部屋タイプを選択</h1>
-      <div id="rank-buttons" class="grid grid-cols-4 gap-2"></div>
     <section id="home-menu" aria-labelledby="menu-heading">
       <h1 id="menu-heading" class="mb-5 text-xl font-bold text-stone-800">メニューを選択</h1>
       <div class="grid grid-cols-2 gap-4 border-t border-stone-200 pt-5">
@@ -16,18 +51,22 @@
           <span class="text-4xl" aria-hidden="true">🛋️</span>
           <span class="mt-2 text-sm font-bold text-stone-700">お部屋・設備案内</span>
         </button>
+<body>
+  <main class="app">
+    <img src="gftoyonaka_w.jpg" alt="グランドファイン豊中" class="logo">
+    <section id="home" class="card">
+      <h1>メニューを選択</h1>
+      <div class="home-links">
+        <a class="home-link" href="https://www.hotel-fine.co.jp/hotel/gf-toyonakaminami/"><span class="home-icon">🏨</span>公式HP</a>
+        <button class="menu-button" id="open-guide" type="button"><span class="home-icon">🛋️</span>お部屋・設備案内</button>
       </div>
     </section>
 
     <section id="room-panel" class="mt-6 hidden border-t border-stone-200 pt-5" aria-live="polite">
-      <div class="mb-4 flex items-center justify-between">
-        <h2 id="rank-title" class="text-xl font-bold text-amber-900"></h2>
-        <span id="room-count" class="rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-900"></span>
       <div class="mb-5 flex items-center justify-between gap-3">
         <button id="back-to-menu" type="button" class="rounded-lg border border-stone-300 px-3 py-2 text-xs font-bold text-stone-600 transition hover:bg-stone-100">← メニュー</button>
         <h2 class="text-xl font-bold text-amber-900">お部屋・設備案内</h2>
       </div>
-      <p id="rank-description" class="mb-5 text-sm leading-6 text-stone-600"></p>
       <h3 class="mb-3 text-sm font-bold text-stone-700">お部屋タイプを選択</h3>
       <div id="rank-buttons" class="mb-6 grid grid-cols-4 gap-2"></div>
       <div id="detail-content" class="hidden border-t border-stone-200 pt-5">
@@ -37,60 +76,26 @@
         </div>
         <p id="rank-description" class="mb-5 text-sm leading-6 text-stone-600"></p>
 
-      <div id="features" class="mb-6 grid grid-cols-3 gap-3"></div>
         <div id="features" class="mb-6 grid grid-cols-3 gap-3"></div>
 
-      <h3 class="mb-3 text-sm font-bold text-stone-700">部屋番号を選択</h3>
-      <div id="room-buttons" class="grid grid-cols-4 gap-2"></div>
-      <p id="room-note" class="mt-3 text-xs leading-5 text-stone-500"></p>
         <h3 class="mb-3 text-sm font-bold text-stone-700">部屋番号を選択</h3>
         <div id="room-buttons" class="grid grid-cols-4 gap-2"></div>
         <p id="room-note" class="mt-3 text-xs leading-5 text-stone-500"></p>
+    <section id="guide" class="card" hidden>
+      <button id="back" class="back" type="button">← メニュー</button>
+      <h1>お部屋タイプを選択</h1>
+      <div id="ranks" class="rank-grid"></div>
+      <div id="details" class="details" hidden>
+        <div class="detail-head"><h2 id="type-name"></h2><span id="room-count" class="count"></span></div>
+        <p id="description" class="description"></p>
+        <div id="features" class="feature-grid"></div>
+        <h3>部屋番号を選択</h3>
+        <div id="rooms" class="room-grid"></div>
+        <p id="note" class="note"></p>
       </div>
     </section>
 
-    <nav class="mt-7 grid grid-cols-2 gap-4 border-t border-stone-200 pt-5" aria-label="関連ページ">
-      <a href="https://www.hotel-fine.co.jp/hotel/gf-toyonakaminami/price/" class="flex flex-col items-center rounded-xl py-2 transition hover:bg-stone-100">
-        <span class="text-3xl" aria-hidden="true">🏷️</span>
-        <span class="mt-1 text-xs font-bold text-stone-700">料金案内</span>
-      </a>
-      <a href="https://www.hotel-fine.co.jp/hotel/gf-toyonakaminami/facility/" class="flex flex-col items-center rounded-xl py-2 transition hover:bg-stone-100">
-        <span class="text-3xl" aria-hidden="true">🛋️</span>
-        <span class="mt-1 text-xs font-bold text-stone-700">設備案内</span>
-      </a>
-    </nav>
   </main>
 
   <script>
-    const features = document.getElementById('features');
-    const roomButtons = document.getElementById('room-buttons');
-    const note = document.getElementById('room-note');
-    const homeMenu = document.getElementById('home-menu');
-    const detailContent = document.getElementById('detail-content');
-
-    Object.keys(roomTypes).forEach((rank) => {
-      const button = document.createElement('button');
-    function showRooms(rank) {
-      const type = roomTypes[rank];
-      panel.classList.remove('hidden');
-      detailContent.classList.remove('hidden');
-      title.textContent = `${rank}タイプ`;
-      count.textContent = `${type.rooms.length}室`;
-      description.textContent = type.description;
-      });
-      panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    document.getElementById('open-room-guide').addEventListener('click', () => {
-      homeMenu.classList.add('hidden');
-      panel.classList.remove('hidden');
-    });
-
-    document.getElementById('back-to-menu').addEventListener('click', () => {
-      panel.classList.add('hidden');
-      detailContent.classList.add('hidden');
-      homeMenu.classList.remove('hidden');
-    });
-  </script>
-</body>
-</html>
+    const roomTypes = {
