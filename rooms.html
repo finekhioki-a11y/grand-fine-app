@@ -11,15 +11,26 @@
 </head>
 <body>
   <div class="bg-white/85 p-6 rounded-3xl backdrop-blur-md shadow-2xl w-full max-w-lg text-center">
+    
+    <!-- ヘッダー：空室状況モニター統合エリア -->
     <div class="flex items-center justify-between mb-6">
       <a href="index.html" class="text-sm font-bold text-amber-900">← メニュー</a>
-      <div id="status-display" class="text-xs font-bold text-amber-900 bg-amber-100 px-3 py-1 rounded-full">
-        空室情報読込中...
+      <div id="status-container" class="flex gap-2">
+        <div class="bg-amber-100 px-3 py-1 rounded-full text-center">
+          <span class="text-[9px] text-amber-900 font-bold block">空室</span>
+          <span id="empty-rooms" class="text-xs font-black text-amber-900">-</span>
+        </div>
+        <div class="bg-stone-200 px-3 py-1 rounded-full text-center">
+          <span class="text-[9px] text-stone-700 font-bold block">準備中</span>
+          <span id="ready-rooms" class="text-xs font-black text-stone-800">-</span>
+        </div>
       </div>
     </div>
+
     <img src="gftoyonaka_w.jpg" alt="グランドファイン豊中" class="mx-auto h-12 mb-6">
     <h1 class="text-xl font-bold text-gray-800 mb-4">お部屋タイプを選択</h1>
     <div id="ranks" class="grid grid-cols-4 gap-2 mb-6"></div>
+    
     <section id="details" class="hidden border-t pt-5 text-left">
       <div class="flex items-center justify-between mb-3">
         <h2 id="title" class="text-xl font-bold text-amber-900"></h2>
@@ -34,17 +45,30 @@
   </div>
 
   <script>
-    const WORKER_URL = 'https://divine-wave-9d51.fine-k-hioki.workers.dev/';
+    // GASのAPI URL
+    const GAS_URL = 'https://script.google.com/macros/s/AKfycbwa3HTkFUbvar9KyQjS7hMbNKCVM5BGGmqCJDr5esrXaEqOHLvUR6GqNbsTcZMNY90B/exec';
 
-    fetch(WORKER_URL)
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById('status-display').textContent = '空き室: ' + data.count + '室';
-      })
-      .catch(() => {
-        document.getElementById('status-display').textContent = '取得不可';
-      });
+    // 空室状況の取得
+    function fetchStatus() {
+      fetch(GAS_URL)
+        .then(res => res.json())
+        .then(data => {
+          if(data.status === "success") {
+            document.getElementById('empty-rooms').textContent = data.empty;
+            document.getElementById('ready-rooms').textContent = data.ready;
+          } else {
+            document.getElementById('empty-rooms').textContent = '！';
+          }
+        })
+        .catch(() => {
+          document.getElementById('empty-rooms').textContent = '×';
+        });
+    }
 
+    // 初回実行
+    fetchStatus();
+
+    // 部屋データ定義
     const types = {
       S:{rooms:['602'],summary:'最上階・広いお部屋',features:[['apartment','最上階'],['king_bed','部屋広い'],['hot_tub','円形ジャグジー'],['shower','ミラブル'],['chair','マッサージチェア'],['tv','65インチ'],['speaker','音響良い']]},
       A:{rooms:['302','307','407','501','502','503','603'],summary:'広めのお部屋・ユニットバス',features:[['king_bed','部屋広め'],['bathtub','ユニットバス'],['shower','ミラブル'],['chair','マッサージチェア'],['tv','50インチ以上']],note:'※307号室にはマッサージチェアがありません。'},
