@@ -1,9 +1,16 @@
 export async function onRequest(context) {
   const { request, next, env } = context;
 
-  // 設定したい ID と パスワード（必要に応じて変更してください）
-  const USERNAME = env.BASIC_USER || "gftoyonaka";
-  const PASSWORD = env.BASIC_PASSWORD || "0516";
+  // Cloudflareの管理画面（Variables and secrets）から取得
+  const USERNAME = env.BASIC_USER;
+  const PASSWORD = env.BASIC_PASSWORD;
+
+  // 環境変数が未設定の場合は安全のためアクセスを遮断
+  if (!USERNAME || !PASSWORD) {
+    return new Response("Configuration Error: Credentials are not set in Cloudflare.", {
+      status: 500,
+    });
+  }
 
   const authHeader = request.headers.get("Authorization");
 
@@ -11,7 +18,7 @@ export async function onRequest(context) {
     return new Response("Unauthorized", {
       status: 401,
       headers: {
-        "WWW-Authenticate": 'Basic realm="Access to staging site"',
+        "WWW-Authenticate": 'Basic realm="Access to site"',
       },
     });
   }
@@ -25,14 +32,16 @@ export async function onRequest(context) {
   const decoded = atob(encoded);
   const [user, pass] = decoded.split(":");
 
+  // 一致していればサイトを表示
   if (user === USERNAME && pass === PASSWORD) {
     return next();
   }
 
+  // 不一致なら再度ログイン画面を表示
   return new Response("Unauthorized", {
     status: 401,
     headers: {
-      "WWW-Authenticate": 'Basic realm="Access to staging site"',
+      "WWW-Authenticate": 'Basic realm="Access to site"',
     },
   });
 }
