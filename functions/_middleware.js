@@ -2,8 +2,8 @@ export async function onRequest(context) {
   const { request, next, env } = context;
 
   // 設定したい ID と パスワード（必要に応じて変更してください）
-  const USERNAME = env.BASIC_USER || "admin";
-  const PASSWORD = env.BASIC_PASSWORD || "password1234";
+  const USERNAME = env.BASIC_USER || "gftoyonaka";
+  const PASSWORD = env.BASIC_PASSWORD || "0516";
 
   const authHeader = request.headers.get("Authorization");
 
