@@ -1,10 +1,10 @@
 {
   "name": "グランドファイン豊中",
-  "short_name": "GF豊中",
-  "start_url": "./index.html",
+  "short_name": "グランドファイン",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "theme_color": "#0f172a",
   "icons": [
     {
       "src": "toyonaka.png",
